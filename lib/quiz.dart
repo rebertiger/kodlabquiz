@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kodlabquiz/WelcomePage.dart';
+import 'package:kodlabquiz/data/questions.dart';
 import 'package:kodlabquiz/questions_screen.dart';
 
 class Quiz extends StatefulWidget {
@@ -12,6 +13,7 @@ class Quiz extends StatefulWidget {
 }
 
 class _QuizState extends State<Quiz> {
+  final List<String> selectedAnswers = [];
   var activeScreen = "welcome-screen";
   @override
   initState() {
@@ -25,12 +27,25 @@ class _QuizState extends State<Quiz> {
     });
   }
 
+  void chooseAnswer(String answer) {
+    selectedAnswers.add(answer);
+
+    if (selectedAnswers.length == questions.length){
+      setState(() {
+        activeScreen = 'start-screen';
+        selectedAnswers.clear();
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     Widget screenWidget = WelcomePage(switchScreen);
 
-    if (activeScreen == "questions-screen"){
-      screenWidget = const QuestionsScreen();
+    if (activeScreen == "questions-screen") {
+      screenWidget = QuestionsScreen(
+        onSelectAnswer: chooseAnswer,
+      );
     }
     return MaterialApp(
       home: Scaffold(

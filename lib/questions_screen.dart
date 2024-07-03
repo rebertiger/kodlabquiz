@@ -4,7 +4,9 @@ import 'package:kodlabquiz/data/questions.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class QuestionsScreen extends StatefulWidget {
-  const QuestionsScreen({super.key});
+  const QuestionsScreen({super.key, required this.onSelectAnswer});
+
+  final void Function(String answer) onSelectAnswer;
 
   @override
   State<QuestionsScreen> createState() {
@@ -14,15 +16,21 @@ class QuestionsScreen extends StatefulWidget {
 
 class _QuestionsScreenState extends State<QuestionsScreen> {
   var currentQuestionIndex = 0;
-  void answerQuestion() {
-    if (currentQuestionIndex <= questions.length - 2) {
+  void answerQuestion(String selectedAnswer) {
+    widget.onSelectAnswer('...');
+    setState(() {
+      currentQuestionIndex++;
+    });
+    
+    /*if (currentQuestionIndex <= questions.length - 2) {
       setState(() {
         currentQuestionIndex++;
       });
     } else {
       print("out of range");
-    }
+    }*/
   }
+  
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +59,7 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
               return AnswerButton(
                 answerText: answer,
                 onTap: () {
-                  answerQuestion();
+                  answerQuestion(answer);
                 },
               );
             }),
