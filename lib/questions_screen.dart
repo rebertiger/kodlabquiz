@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kodlabquiz/answer_button.dart';
 import 'package:kodlabquiz/data/questions.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class QuestionsScreen extends StatefulWidget {
   const QuestionsScreen({super.key});
@@ -18,8 +19,7 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
       setState(() {
         currentQuestionIndex++;
       });
-    }
-    else {
+    } else {
       print("out of range");
     }
   }
@@ -35,11 +35,15 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Text(currentQuestion.text,
-                textAlign: TextAlign.center,
-                style: const TextStyle(
-                  color: Colors.white,
-                )),
+            Text(
+              currentQuestion.text,
+              textAlign: TextAlign.center,
+              style: GoogleFonts.manrope(
+                color: Colors.white,
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
             const SizedBox(
               height: 30,
             ),
