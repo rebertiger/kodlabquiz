@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:kodlabquiz/WelcomePage.dart';
 import 'package:kodlabquiz/data/questions.dart';
 import 'package:kodlabquiz/questions_screen.dart';
+import 'package:kodlabquiz/results_screen.dart';
+
 
 class Quiz extends StatefulWidget {
   const Quiz({super.key});
@@ -30,10 +32,9 @@ class _QuizState extends State<Quiz> {
   void chooseAnswer(String answer) {
     selectedAnswers.add(answer);
 
-    if (selectedAnswers.length == questions.length){
+    if (selectedAnswers.length == questions.length) {
       setState(() {
-        activeScreen = 'start-screen';
-        selectedAnswers.clear();
+        activeScreen = 'results-screen';
       });
     }
   }
@@ -45,6 +46,11 @@ class _QuizState extends State<Quiz> {
     if (activeScreen == "questions-screen") {
       screenWidget = QuestionsScreen(
         onSelectAnswer: chooseAnswer,
+      );
+    }
+    if (activeScreen == "results-screen") {
+      screenWidget = ResultsScreen(
+        chosenAnswers: selectedAnswers,
       );
     }
     return MaterialApp(
