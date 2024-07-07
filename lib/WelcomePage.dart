@@ -36,7 +36,7 @@ class WelcomePage extends StatelessWidget {
           ),
           FilledButton.tonalIcon(
             style: FilledButton.styleFrom(
-              backgroundColor: const Color.fromARGB(255, 125, 152, 110),
+              backgroundColor: const Color(0xFFD8BFD8),
             ),
             onPressed: () {
               startQuiz();
