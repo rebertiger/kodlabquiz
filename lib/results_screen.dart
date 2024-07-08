@@ -3,9 +3,10 @@ import 'package:kodlabquiz/data/questions.dart';
 import 'package:kodlabquiz/questions_summary.dart';
 
 class ResultsScreen extends StatelessWidget {
-  const ResultsScreen({super.key, required this.chosenAnswers});
+  const ResultsScreen({super.key, required this.chosenAnswers, required this.onRestart});
   
   final List<String> chosenAnswers;
+  final VoidCallback onRestart;
 
   List<Map<String, Object>> getSummaryData() {
     final List<Map<String, Object>> summary = [];
@@ -34,17 +35,20 @@ class ResultsScreen extends StatelessWidget {
       backgroundColor: Colors.deepPurple,
       body: Container(
          decoration: const BoxDecoration(
-            gradient:  LinearGradient(
+            gradient: LinearGradient(
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
-              colors:[ Color(0xFF6A0DAD),
+              colors: [
+                Color(0xFF6A0DAD),
                 Color(0xFF7A1BB1),
                 Color(0xFF8B29B5),
                 Color(0xFF9C37B9),
                 Color(0xFFAD45BD),
                 Color(0xFFBE53C1),
                 Color(0xFFCF61C5),
-                Color(0xFFE070C9),]),
+                Color(0xFFE070C9),
+              ],
+            ),
           ),
         child: Center(
           child: Container(
@@ -69,16 +73,14 @@ class ResultsScreen extends StatelessWidget {
                   height: 30,
                 ),
                 TextButton(
-                  onPressed: () {
-                    //
-                  },
+                  onPressed: onRestart,
                   style: TextButton.styleFrom(
                     backgroundColor: const Color(0xFFD8BFD8),
                     padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                   ),
                   child: const Text(
                     "Restart Quiz!",
-                    style: TextStyle(color: Colors.white,),
+                    style: TextStyle(color: Colors.white),
                   ),
                 ),
               ],

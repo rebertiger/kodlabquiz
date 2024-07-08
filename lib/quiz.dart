@@ -4,7 +4,6 @@ import 'package:kodlabquiz/data/questions.dart';
 import 'package:kodlabquiz/questions_screen.dart';
 import 'package:kodlabquiz/results_screen.dart';
 
-
 class Quiz extends StatefulWidget {
   const Quiz({super.key});
 
@@ -17,6 +16,7 @@ class Quiz extends StatefulWidget {
 class _QuizState extends State<Quiz> {
   final List<String> selectedAnswers = [];
   var activeScreen = "welcome-screen";
+
   @override
   initState() {
     activeScreen = "welcome-screen";
@@ -25,6 +25,13 @@ class _QuizState extends State<Quiz> {
 
   void switchScreen() {
     setState(() {
+      activeScreen = "questions-screen";
+    });
+  }
+
+  void restartQuiz() {
+    setState(() {
+      selectedAnswers.clear();
       activeScreen = "questions-screen";
     });
   }
@@ -51,6 +58,7 @@ class _QuizState extends State<Quiz> {
     if (activeScreen == "results-screen") {
       screenWidget = ResultsScreen(
         chosenAnswers: selectedAnswers,
+        onRestart: restartQuiz,
       );
     }
     return MaterialApp(
